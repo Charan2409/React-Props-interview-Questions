@@ -1,0 +1,41 @@
+Data from child to parent via callback function as props:
+
+parent Component: 
+import "./styles.css";
+import { useState } from "react";
+import Child from "./Child";
+
+export default function App() {
+  const [age, setAge] = useState(1);
+
+  const handleClick = (data) => {
+    setAge(data);
+  };
+
+  return (
+    <div className="App">
+      <Child handleClick={handleClick} />
+      <h1>{age}</h1>
+    </div>
+  );
+}
+
+Child Component : 
+import { useState } from "react";
+
+const Child = ({ handleClick }) => {
+  const [num, setNum] = useState(2);
+
+  const handleButton = () => {
+    setNum(num + 1);
+    handleClick(num);
+  };
+
+  return (
+    <div>
+      <button onClick={handleButton}>Increase Age</button>
+    </div>
+  );
+};
+
+export default Child;
